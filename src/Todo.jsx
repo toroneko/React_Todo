@@ -20,6 +20,11 @@ export const Todo = () => {
   };
 
   const onChageTodoText = (event) => setTodoText(event.target.value);
+  const onClickDlete = (index) => {
+    const newTodos = [...incompleteTodos];
+    newTodos.splice(index, 1);
+    setIncompleteTodos(newTodos);
+  };
   return (
     <>
       <div className="input-area">
@@ -33,13 +38,13 @@ export const Todo = () => {
       <div className="incomplete-area">
         <p className="title">未完了のTodo</p>
         <ul>
-          {incompleteTodos.map((todo) => {
+          {incompleteTodos.map((todo, index) => {
             return (
               <li key={todo}>
                 <div className="list-row">
                   <p className="todo-item">{todo}</p>
                   <button>完了</button>
-                  <button>削除</button>
+                  <button onClick={() => onClickDlete(index)}>削除</button>
                 </div>
               </li>
             );
