@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./styles.css";
+import { InputTodo } from "./components/inputTodo";
+import { IncompleteTodos } from "./components/incompleteTodos";
+import { CompleteTodos } from "./components/CompleteTodos";
 
 export const Todo = () => {
   const [todoText, setTodoText] = useState("");
@@ -39,46 +42,18 @@ export const Todo = () => {
 
   return (
     <>
-      <div className="input-area">
-        <input
-          placeholder="Todoを入力"
-          value={todoText}
-          onChange={onChageTodoText}
-        />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
-      <div className="incomplete-area">
-        <p className="title">未完了のTodo</p>
-        <ul>
-          {incompleteTodos.map((todo, index) => {
-            return (
-              <li key={todo}>
-                <div className="list-row">
-                  <p className="todo-item">{todo}</p>
+      <InputTodo
+        todoText={todoText}
+        onChange={onChageTodoText}
+        onClick={onClickAdd}
+      />
+      <IncompleteTodos
+        todos={incompleteTodos}
+        onClickComplete={onClickComplete}
+        onClickDlete={onClickDlete}
+      />
+      <CompleteTodos completeTodos={completeTodos} onClickBack={onClickBack} />
 
-                  <button onClick={() => onClickComplete(index)}>完了</button>
-                  <button onClick={() => onClickDlete(index)}>削除</button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="complete-area">
-        <p className="title">完了のTodo</p>
-        <ul>
-          {completeTodos.map((todo, index) => {
-            return (
-              <li key={todo}>
-                <div className="list-row">
-                  <p className="todo-item">{todo}</p>
-                  <button onClick={() => onClickBack(index)}>戻す</button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
     </>
   );
 };
