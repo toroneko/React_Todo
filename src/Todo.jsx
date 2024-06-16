@@ -22,6 +22,7 @@ export const Todo = () => {
     newTodos.splice(index, 1);
     setIncompleteTodos(newTodos);
   };
+
   const onClickComplete = (index) => {
     const newIncompleteTodos = [...incompleteTodos];
     newIncompleteTodos.splice(index, 1);
@@ -38,6 +39,7 @@ export const Todo = () => {
     setCompleteTodos(newCompleteTodos);
     setIncompleteTodos(newIncompleteTodos);
   };
+
   return (
     <>
       <InputTodo
@@ -51,6 +53,7 @@ export const Todo = () => {
         onClickDlete={onClickDlete}
       />
       <CompleteTodos completeTodos={completeTodos} onClickBack={onClickBack} />
+
     </>
   );
 };
